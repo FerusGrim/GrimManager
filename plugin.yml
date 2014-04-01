@@ -1,0 +1,52 @@
+name: GrimBanned
+main: io.github.ferusgrim.GrimBanned.GrimBanned
+website: ferusgrim.github.io
+version: 1.0.0
+author: FerusGrim
+description: Efficient MySQL-based, banning plugin, capable of processing multiple names and IPs.
+commands:
+    ban:
+        description: Ban player from server.
+        usage: /ban [player, player1, etc]
+    banip:
+        description: Ban IP from server.
+        usage: /banip [127.0.0.1, 192.168.1.101, etc]
+    unban:
+        description: Unban player from server.
+        usage: /unban [player. player1, etc]
+    unbanip:
+        description: Unban IP from server.
+        usage: /unbanip [127.0.0.1, 192.168.1.101, etc]
+permissions:
+    grimbanned.admin:
+        description: Grants full permissions.
+        children:
+            grimbanned.mod: true
+            grimbanned.reload: true
+    grimbanned.mod:
+        description: Grants basic permissions.
+        children:
+            grimbanned.ban: true
+            grimbanned.banip: true
+            grimbanned.unban: true
+            grimbanned.unbanip: true
+            grimbanned.notify-fail: true
+            grimbanned.notify-ban: true
+    grimbanned.ban:
+        description: Allows usage of /ban.
+        default: op
+    grimbanned.banip:
+        description: Allows usage of /banip.
+        default: op
+    grimbanned.unban:
+        description: Allows usage of /unban.
+        default: op
+    grimbanned.unbanip:
+        description: Allows usage of /unbanip.
+        default: op
+    grimbanned.notify-fail:
+        description: Notifies player if a banned player attempts to join.
+        default: op
+    grimbanned.notify-ban:
+        description: Notifies player when player is banned.
+        default: true

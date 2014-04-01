@@ -1,0 +1,13 @@
+GrimBanned: false
+Messages:
+  Disconnected: Sorry, {player}, you've been banned!
+  Notification: Hey! {player}, a banned player, attempted to join!
+Notifications:
+  Failures: true
+  Banned: true
+MySQL:
+  Host: localhost
+  Port: 3306
+  Database: grimbanned
+  Username: root
+  Password: toor
