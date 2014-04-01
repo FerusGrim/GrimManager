@@ -31,6 +31,5 @@ local.properties
 ###########
 ## MY STUFF
 ###########
-*.jar
 *.bat
 resources/
