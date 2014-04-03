@@ -17,6 +17,7 @@ public class ConfigManager {
 	public static boolean motdEnabled;
 	public static boolean Notify;
 	public static boolean NotifyServer;
+	public static boolean NotifyServerKicked;
 	public static String DisconnectMSG;
 	public static String NotifyMSG;
 	private static int sqlPort;
@@ -39,6 +40,7 @@ public class ConfigManager {
 		NotifyMSG = "[GB] " + plugin.getConfig().getString("Messages.Notification");
 		Notify = plugin.getConfig().getBoolean("Notifications.Failues");
 		NotifyServer = plugin.getConfig().getBoolean("Notifications.Banned");
+		NotifyServerKicked = plugin.getConfig().getBoolean("Notifications.Kicked");
 		if(gbEnabled) ConfigureSQL(plugin);
 	}
 

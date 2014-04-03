@@ -14,13 +14,9 @@ public class BanManager {
 
 	public static boolean Ban(GrimBanned plugin, CommandSender sender, String[] args) {
 		i = 0;
-		String senderstr = "";
+		String senderstr = sender.getName();
 		String sender_ip = "";
-		if(!(sender instanceof Player)){
-			senderstr = sender.getName();
-			sender_ip = "127.0.0.1";
-		}
-		if(senderstr.isEmpty()) senderstr = sender.getName().toLowerCase();
+		if(!(sender instanceof Player))sender_ip = "127.0.0.1";
 		if(sender_ip.isEmpty()) sender_ip = ((Player) sender).getAddress().getAddress().getHostAddress().toString();
 		while(i < args.length){
 			String playerstr = args[i].toLowerCase();
@@ -48,13 +44,9 @@ public class BanManager {
 	
 	public static boolean BanIp(GrimBanned plugin, CommandSender sender, String[] args){
 		i = 0;
-		String senderstr = "";
+		String senderstr = sender.getName();
 		String sender_ip = "";
-		if(!(sender instanceof Player)){
-			senderstr = sender.getName();
-			sender_ip = "127.0.0.1";
-		}
-		if(senderstr.isEmpty()) senderstr = sender.getName().toLowerCase();
+		if(!(sender instanceof Player))sender_ip = "127.0.0.1";
 		if(sender_ip.isEmpty()) sender_ip = ((Player) sender).getAddress().getAddress().getHostAddress().toString();
 		while(i < args.length){
 			String player_ip = args[i];
@@ -88,13 +80,9 @@ public class BanManager {
 	public static boolean Unban(CommandSender sender, String[] args) {
 		i = 0;
 		String player = args[i].toLowerCase();
-		String senderstr = "";
+		String senderstr = sender.getName();
 		String sender_ip = "";
-		if(!(sender instanceof Player)){
-			senderstr = sender.getName();
-			sender_ip = "127.0.0.1";
-		}
-		if(senderstr.isEmpty()) senderstr = sender.getName().toLowerCase();
+		if(!(sender instanceof Player))sender_ip = "127.0.0.1";
 		if(sender_ip.isEmpty()) sender_ip = ((Player) sender).getAddress().getAddress().getHostAddress().toString();
 		while(i < args.length){
 			if(!(args[i].length() > 16) && args[i].matches("[a-zA-Z0-9_]+") && ConfigManager.isPlayerNameBanned(args[i])){
@@ -113,13 +101,9 @@ public class BanManager {
 	public static boolean UnbanIp(CommandSender sender, String[] args) {
 		i = 0;
 		String player_ip = args[i];
-		String senderstr = "";
+		String senderstr = sender.getName();
 		String sender_ip = "";
-		if(!(sender instanceof Player)){
-			senderstr = sender.getName();
-			sender_ip = "127.0.0.1";
-		}
-		if(senderstr.isEmpty()) senderstr = sender.getName().toLowerCase();
+		if(!(sender instanceof Player))sender_ip = "127.0.0.1";
 		if(sender_ip.isEmpty()) sender_ip = ((Player) sender).getAddress().getAddress().getHostAddress().toString();
 		while(i < args.length){
 			if(!(player_ip.length() > 15) && !(player_ip.length() < 7) && ConfigManager.isPlayerIpBanned(player_ip)){

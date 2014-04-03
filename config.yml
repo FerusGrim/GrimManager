@@ -6,6 +6,7 @@ Messages:
 Notifications:
   Failures: true
   Banned: true
+  Kicked: true
 MySQL:
   Host: localhost
   Port: 3306

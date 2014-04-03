@@ -22,22 +22,27 @@ public class Executor implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		String command = cmd.getName().toLowerCase();
 		boolean hasPerm = false;
 		if(!(sender instanceof Player))hasPerm = true;
 		if(!hasPerm){
 			Player player = null;
 			player = (Player) sender;
-			if(player.hasPermission("grimbanned." + label))hasPerm = true;
+			if(player.hasPermission("grimbanned." + command))hasPerm = true;
 			if(!hasPerm){
 				sender.sendMessage("[GB] Insufficient Permissions!"); 
 				return true;
 			}
 		}
-		if(args.length < 1)return false;
-		if(label.equals("ban"))return BanManager.Ban(plugin, sender, args);
-		if(label.equals("banip"))return BanManager.BanIp(plugin, sender, args);
-		if(label.equals("unban"))return BanManager.Unban(sender, args);
-		if(label.equals("unbanip"))return BanManager.UnbanIp(sender, args);
+		if(args.length < 1 && !command.equals("kickall")){
+			return false;
+		}
+		if(command.equals("ban"))return BanManager.Ban(plugin, sender, args);
+		if(command.equals("banip"))return BanManager.BanIp(plugin, sender, args);
+		if(command.equals("unban"))return BanManager.Unban(sender, args);
+		if(command.equals("unbanip"))return BanManager.UnbanIp(sender, args);
+		if(command.equals("kick"))return KickManager.Kick(plugin, sender, args);
+		if(command.equals("kickall"))return KickManager.KickAll(plugin, sender, args);
 		return false;
 	}
 

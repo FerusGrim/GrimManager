@@ -17,6 +17,12 @@ commands:
     unbanip:
         description: Unban IP from server.
         usage: /unbanip [127.0.0.1, 192.168.1.101, etc]
+    kick:
+        description: Kicks player from server.
+        usage: /kick [player1, player2, etc]
+    kickall:
+        description: Kicks all players from the server.
+        usage: /kickall [time-before-action]
 permissions:
     grimbanned.admin:
         description: Grants full permissions.
@@ -30,8 +36,11 @@ permissions:
             grimbanned.banip: true
             grimbanned.unban: true
             grimbanned.unbanip: true
+            grimbanned.kick: true
+            grimbanned.kickall: true
             grimbanned.notify-fail: true
             grimbanned.notify-ban: true
+            grimbanned.notify-kick: true
     grimbanned.ban:
         description: Allows usage of /ban.
         default: op
@@ -44,9 +53,18 @@ permissions:
     grimbanned.unbanip:
         description: Allows usage of /unbanip.
         default: op
+    grimbanned.kick:
+        description: Allows usage of /kick.
+        default: op
+    grimbanned.kickall:
+        description: Allows usage of /kickall.
+        default: op
     grimbanned.notify-fail:
         description: Notifies player if a banned player attempts to join.
         default: op
     grimbanned.notify-ban:
         description: Notifies player when player is banned.
+        default: true
+    grimbanned.notify-kick:
+        description: Notifies player when player is kicked.
         default: true
