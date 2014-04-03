@@ -1,4 +1,5 @@
 GrimBanned: false
+MotD: true
 Messages:
   Disconnected: Sorry, {player}, you've been banned!
   Notification: Hey! {player}, a banned player, attempted to join!

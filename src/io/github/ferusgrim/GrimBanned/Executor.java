@@ -1,5 +1,7 @@
 package io.github.ferusgrim.GrimBanned;
 
+import java.util.logging.Level;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,6 +12,7 @@ import org.bukkit.entity.Player;
  * @author FerusGrim
  */
 
+@SuppressWarnings("unused")
 public class Executor implements CommandExecutor {
 	private GrimBanned plugin;
 
@@ -20,20 +23,21 @@ public class Executor implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		boolean hasPerm = false;
-		if(!(sender instanceof Player)) hasPerm = true;
+		if(!(sender instanceof Player))hasPerm = true;
 		if(!hasPerm){
 			Player player = null;
 			player = (Player) sender;
-			if(player.hasPermission("grimbanned." + args[0])) hasPerm = true;
-			if(!hasPerm) sender.sendMessage("[GB] Insufficient Permissions!"); return true;
+			if(player.hasPermission("grimbanned." + label))hasPerm = true;
+			if(!hasPerm){
+				sender.sendMessage("[GB] Insufficient Permissions!"); 
+				return true;
+			}
 		}
-		if(args.length < 1){
-			return false;
-		}
-		if(args[0].equals("ban")) return BanManager.Ban(plugin, sender, args);
-		if(args[0].equals("banip")) return BanManager.BanIp(plugin, sender, args);
-		if(args[0].equals("unban")) return BanManager.Unban(sender, args);
-		if(args[0].equals("unbanip")) return BanManager.UnbanIp(sender, args);
+		if(args.length < 1)return false;
+		if(label.equals("ban"))return BanManager.Ban(plugin, sender, args);
+		if(label.equals("banip"))return BanManager.BanIp(plugin, sender, args);
+		if(label.equals("unban"))return BanManager.Unban(sender, args);
+		if(label.equals("unbanip"))return BanManager.UnbanIp(sender, args);
 		return false;
 	}
 

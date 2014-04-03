@@ -7,6 +7,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
+import org.bukkit.event.server.ServerListPingEvent;
 
 /**
  * Copyright (C) 2014 Nicholas Badger
@@ -21,21 +22,38 @@ public class PlayerManager implements Listener {
 			if(event.getResult() == Result.ALLOWED){
 				Player player = event.getPlayer();
 				String playerstr = player.getName().toLowerCase();
-				String playerip = player.getAddress().getAddress().getHostAddress().toString().replaceAll("/", "").replaceAll("\\.", "-");
+				String playerip = event.getAddress().getHostAddress().toString();
 				String DMSG = ConfigManager.DisconnectMSG.replace("{player}", player.getName());
 				String NMSG = ConfigManager.NotifyMSG.replace("{player}", player.getName());
 				if(ConfigManager.isPlayerNameBanned(playerstr)){
-					ConfigManager.updatePlayer("player_ip", playerip, "player", playerstr);
+					if(!ConfigManager.isPlayerIpBanned(playerip)){
+						ConfigManager.updatePlayer("player", playerstr, playerip);
+						ConfigManager.updateLog(playerip, "IP logged automatically", playerstr, playerip);
+					}
 					event.setKickMessage(DMSG);
 					event.setResult(PlayerLoginEvent.Result.KICK_BANNED);
 					if(ConfigManager.Notify) Bukkit.getServer().broadcast(NMSG, "grimbanned.notify-fail");
 				}
 				if(ConfigManager.isPlayerIpBanned(playerip)){
-					ConfigManager.updatePlayer("player", playerstr, "player_ip", playerip);
+					if(!ConfigManager.isPlayerNameBanned(playerstr)){
+						ConfigManager.updatePlayer("player_ip", playerip, playerstr);
+						ConfigManager.updateLog(playerstr, "Name logged automatically", playerstr, playerip);
+					}
+					ConfigManager.updatePlayer("player_ip", playerip, playerstr);
 					event.setKickMessage(DMSG);
 					event.setResult(PlayerLoginEvent.Result.KICK_BANNED);
 					if(ConfigManager.Notify) Bukkit.getServer().broadcast(NMSG, "grimbanned.notify-fail");
 				}
+			}
+		}
+	}
+	
+	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+	public void onServerListPing(final ServerListPingEvent event){
+		if(ConfigManager.motdEnabled){
+			String playerIP = event.getAddress().getHostAddress().toString();
+			if(ConfigManager.isPlayerIpBanned(playerIP)){
+				event.setMotd("You are BANNED!: (" + playerIP + ")");
 			}
 		}
 	}
