@@ -22,7 +22,7 @@ public class PlayerManager implements Listener {
 			if(event.getResult() == Result.ALLOWED){
 				Player player = event.getPlayer();
 				String playerstr = player.getName().toLowerCase();
-				String playerip = event.getAddress().getHostAddress().toString();
+				String playerip = event.getAddress().getHostAddress();
 				String DMSG = ConfigManager.DisconnectMSG.replace("{player}", player.getName());
 				String NMSG = ConfigManager.NotifyMSG.replace("{player}", player.getName());
 				if(ConfigManager.isPlayerNameBanned(playerstr)){
@@ -51,7 +51,7 @@ public class PlayerManager implements Listener {
 	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
 	public void onServerListPing(final ServerListPingEvent event){
 		if(ConfigManager.motdEnabled){
-			String playerIP = event.getAddress().getHostAddress().toString();
+			String playerIP = event.getAddress().getHostAddress();
 			if(ConfigManager.isPlayerIpBanned(playerIP)){
 				event.setMotd("You are BANNED!: (" + playerIP + ")");
 			}

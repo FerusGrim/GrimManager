@@ -17,7 +17,7 @@ public class BanManager {
 		String senderstr = sender.getName();
 		String sender_ip = "";
 		if(!(sender instanceof Player))sender_ip = "127.0.0.1";
-		if(sender_ip.isEmpty()) sender_ip = ((Player) sender).getAddress().getAddress().getHostAddress().toString();
+		if(sender_ip.isEmpty()) sender_ip = ((Player) sender).getAddress().getAddress().getHostAddress();
 		while(i < args.length){
 			String playerstr = args[i].toLowerCase();
 			Player player = plugin.getServer().getPlayerExact(args[i]);
@@ -47,12 +47,12 @@ public class BanManager {
 		String senderstr = sender.getName();
 		String sender_ip = "";
 		if(!(sender instanceof Player))sender_ip = "127.0.0.1";
-		if(sender_ip.isEmpty()) sender_ip = ((Player) sender).getAddress().getAddress().getHostAddress().toString();
+		if(sender_ip.isEmpty()) sender_ip = ((Player) sender).getAddress().getAddress().getHostAddress();
 		while(i < args.length){
 			String player_ip = args[i];
 			Player player = null;
 			for(Player p : Bukkit.getOnlinePlayers()){
-				if(p.getAddress().getAddress().getHostAddress().toString().equals(player_ip)){
+				if(p.getAddress().getAddress().getHostAddress().equals(player_ip)){
 					player = p;
 				}
 			}
@@ -83,7 +83,7 @@ public class BanManager {
 		String senderstr = sender.getName();
 		String sender_ip = "";
 		if(!(sender instanceof Player))sender_ip = "127.0.0.1";
-		if(sender_ip.isEmpty()) sender_ip = ((Player) sender).getAddress().getAddress().getHostAddress().toString();
+		if(sender_ip.isEmpty()) sender_ip = ((Player) sender).getAddress().getAddress().getHostAddress();
 		while(i < args.length){
 			if(!(args[i].length() > 16) && args[i].matches("[a-zA-Z0-9_]+") && ConfigManager.isPlayerNameBanned(args[i])){
 				ConfigManager.unbanPlayer("player", player);
@@ -104,7 +104,7 @@ public class BanManager {
 		String senderstr = sender.getName();
 		String sender_ip = "";
 		if(!(sender instanceof Player))sender_ip = "127.0.0.1";
-		if(sender_ip.isEmpty()) sender_ip = ((Player) sender).getAddress().getAddress().getHostAddress().toString();
+		if(sender_ip.isEmpty()) sender_ip = ((Player) sender).getAddress().getAddress().getHostAddress();
 		while(i < args.length){
 			if(!(player_ip.length() > 15) && !(player_ip.length() < 7) && ConfigManager.isPlayerIpBanned(player_ip)){
 				ConfigManager.unbanPlayer("player_ip", player_ip);

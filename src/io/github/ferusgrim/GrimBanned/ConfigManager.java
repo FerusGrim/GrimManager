@@ -28,7 +28,9 @@ public class ConfigManager {
 
 	public static void Start(GrimBanned plugin) {
 		File mDir = plugin.getDataFolder();
-		if(!mDir.exists()) mDir.mkdir();
+		if(!mDir.exists()){
+            mDir.mkdir();
+        }
 		plugin.saveDefaultConfig();
 		ConfigureVariables(plugin);
 	}

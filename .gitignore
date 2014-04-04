@@ -33,3 +33,5 @@ local.properties
 ###########
 *.bat
 resources/
+.idea/
+*.iml

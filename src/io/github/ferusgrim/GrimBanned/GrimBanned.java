@@ -13,7 +13,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class GrimBanned extends JavaPlugin {
 	public static final Logger toLog = Logger.getLogger("Minecraft");
-	public final String pName = "[GrimBanned]";
 	
 	@Override
 	public void onEnable() {
